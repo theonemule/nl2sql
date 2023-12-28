@@ -3,12 +3,6 @@
 ## Overview
 This project showcases the integration of GPT-3.5 into a Python application, enabling users to input natural language queries and receive precise SQL translations. This feature, known as "Natural Language to SQL Translation" or "NL2SQL", allows for seamless interaction with databases without requiring the user to write any SQL code.
 
-## Features
-- **GPT-3.5 Integration:** Leverage the advanced natural language understanding of GPT-3.5.
-- **User-Friendly Interface:** Simple input method for natural language queries.
-- **Efficient SQL Translation:** Accurate conversion of natural language to SQL queries.
-- **Database Flexibility:** Compatible with various SQL database systems.
-
 ## Installation
 To set up the project, follow these steps:
 1. Clone the repository:
