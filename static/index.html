@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Search</title>
+</head>
+<body>
+    <h1>Search for Questions</h1>
+    <form id="question-form">
+        <p><label for="question">Enter your question:</label></p>
+        <p><textarea type="text" id="question" name="question" required></textarea></p>
+        <p><button type="submit">Search</button></p>
+    </form>
+
+    <h2>Search Results:</h2>
+    <table id="results">
+        <thead>
+            <tr>
+                <th>Show Number</th>
+                <th>Air Date</th>
+                <th>Round</th>
+                <th>Category</th>
+                <th>Value</th>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Results will be displayed here -->
+        </tbody>
+    </table>
+
+    <script>
+        // JavaScript code to send the question to the API and display results
+        const form = document.getElementById("question-form");
+        const resultsTable = document.getElementById("results").getElementsByTagName('tbody')[0];
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            
+            const question = document.getElementById("question").value;
+            const apiUrl = "/ask_question"; // Modify if your API endpoint is different
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ question }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResults(data);
+                } else {
+                    console.error("Error fetching data from the API");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        });
+
+        function displayResults(results) {
+            resultsTable.innerHTML = "";
+            if (results.length === 0) {
+                const row = resultsTable.insertRow();
+                const cell = row.insertCell();
+                cell.textContent = "No results found";
+                cell.colSpan = 7;
+            } else {
+                results.forEach((result) => {
+                    const row = resultsTable.insertRow();
+                    const keys = ["ShowNumber", "AirDate", "Round", "Category", "Value", "Question", "Answer"];
+                    keys.forEach((key) => {
+                        const cell = row.insertCell();
+                        cell.textContent = result[key];
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>
