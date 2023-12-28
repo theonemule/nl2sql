@@ -6,7 +6,7 @@ import openai
 import sqlite3
 from werkzeug.local import Local
 
-openai.api_key="56bf5150b5584c7983e8af95dc2216c6"
+openai.api_key="Your API Key here"
 openai.api_base="https://ai-dictate.openai.azure.com/" # your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
 openai.api_type='azure'
 openai.api_version = '2023-05-15' # this might change in the future
